@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profolio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <script src="header.js" data-prefix="./"></script>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>HI , I AM <span class="name-highlight">Lin bil Celestre</span></h1>
+            <h3 class="title-grad">IT GRADUATE</h3>
+            <p class="subtitle-grad">Fresh Graduate</p>
+            <h2 class="typing-text"><span class="typed-text"></span><span class="cursor">&nbsp;</span></h2>
+            <p class="desc">Passionate about creating responsive websites and developing innovative technology solution
+            </p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/celestre.linbil" target="_blank" class="social-icon"><img
+                        src="Picture/facebook.png" alt="Facebook"></a>
+                <a href="https://github.com/Linbil21" target="_blank" class="social-icon"><img src="Picture/github.png"
+                        alt="GitHub"></a>
+                <a href="https://www.linkedin.com/in/linbil-celestre-6bb6b2396/" target="_blank"
+                    class="social-icon"><img src="Picture/Linkidin.jpg" alt="LinkedIn"></a>
+                <a href="https://www.canva.com/design/DAHLhT8pnPQ/FmAVMrvHLdE8I1X_SdRUAA/edit" target="_blank"
+                    class="social-icon"><img src="Picture/logo.jpg" alt="Canva"></a>
+            </div>
+            <a href="Resume/Lin%20bil%20_Celestre_CV_2026.pdf" target="_blank" class="btn-resume">Resume CV</a>
+        </div>
+        <div class="hero-image">
+            <div class="image-wrapper">
+                <img src="Picture/Graduate.jpg" alt="Linbil Profile">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Typewriter Effect
+        const words = ["WEB DEVELOPER", "FRONT END DEVELOPER"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedTextSpan = document.querySelector(".typed-text");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typedTextSpan.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextSpan.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; // Pause at full word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500; // Pause before typing next word
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(type, 1000);
+        });
+    </script>
+
+</body>
+
+</html>
