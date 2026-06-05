@@ -44,6 +44,10 @@
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project1.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
+                        </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
                             <span>Source Code</span>
@@ -78,6 +82,10 @@
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project2.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
+                        </a>
                         <a href="https://github.com/Linbil21/SMS" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21/SMS')">
                             <span>Source Code</span>
@@ -110,6 +118,10 @@
                         <a href="https://masterdriving.ph" target="_blank" class="project-btn live-btn">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
+                        </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project3.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
                         </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
@@ -144,6 +156,10 @@
                         <a href="#" class="project-btn live-btn" onclick="showMaintenanceModal(event)">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
+                        </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project4.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
                         </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
@@ -182,6 +198,10 @@
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project5.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
+                        </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
                             <span>Source Code</span>
@@ -215,6 +235,10 @@
                         <a href="https://linbil21.github.io/Guidance/login.html" target="_blank" class="project-btn live-btn">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
+                        </a>
+                        <a href="#" class="project-btn image-btn" onclick="showProjectImage(event, 'images/project6.png')">
+                            <span>View Image</span>
+                            <span class="btn-icon">🖼️</span>
                         </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
@@ -261,6 +285,14 @@
         </div>
     </div>
 
+    <!-- Image Preview Modal -->
+    <div id="image-modal" class="modal-overlay">
+        <div class="modal-content image-modal-content">
+            <span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
+            <img id="modal-project-image" src="" alt="Project Screenshot" class="modal-image">
+        </div>
+    </div>
+
     <script>
         let targetRepoUrl = "";
 
@@ -300,14 +332,29 @@
             document.getElementById("maintenance-modal").classList.remove("active");
         }
 
+        function showProjectImage(event, imageSrc) {
+            event.preventDefault();
+            const modal = document.getElementById("image-modal");
+            const modalImg = document.getElementById("modal-project-image");
+            modalImg.src = imageSrc;
+            modal.classList.add("active");
+        }
+
+        function closeImageModal() {
+            document.getElementById("image-modal").classList.remove("active");
+        }
+
         // Close modal when clicking outside
         window.onclick = function (event) {
             const passwordModal = document.getElementById("password-modal");
             const maintenanceModal = document.getElementById("maintenance-modal");
+            const imageModal = document.getElementById("image-modal");
             if (event.target == passwordModal) {
                 closePasswordModal();
             } else if (event.target == maintenanceModal) {
                 closeMaintenanceModal();
+            } else if (event.target == imageModal) {
+                closeImageModal();
             }
         }
 
