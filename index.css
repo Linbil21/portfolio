@@ -132,6 +132,18 @@ header .logo-link:hover .logo-img {
     filter: drop-shadow(0 0 12px rgba(46, 130, 166, 0.6));
 }
 
+header .logo-text {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(120deg, #ffffff 10%, #88c8e4 40%, #2e82a6 60%, #88c8e4 80%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradientShift 6s linear infinite;
+    white-space: nowrap;
+}
+
 header nav ul {
     list-style: none;
     display: flex;

@@ -8,6 +8,7 @@
         <div class="logo">
             <a href="${prefix}index.html" class="logo-link">
                 <img src="${prefix}logo.png" alt="Linbil Celestre Logo" class="logo-img">
+                <span class="logo-text">Portfolio</span>
             </a>
         </div>
         <nav>
