@@ -7,8 +7,7 @@
     <header>
         <div class="logo">
             <a href="${prefix}index.html" class="logo-link">
-                <img src="${prefix}logo.png" alt="Linbil Celestre Logo" class="logo-img">
-                <span class="logo-text">Linbil | Portfolio</span>
+                <img src="${prefix}logo.png" alt="Linbil Celestre Logo" class="logo-img"> <br>
             </a>
         </div>
         <nav>
