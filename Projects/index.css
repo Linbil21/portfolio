@@ -183,13 +183,14 @@
 
 .project-card-footer {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .project-btn {
     flex: 1;
-    min-width: 0;
+    min-width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -197,7 +198,7 @@
     padding: 10px 4px;
     border-radius: 12px;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     text-decoration: none;
     transition: all 0.3s ease;
     border: none;
