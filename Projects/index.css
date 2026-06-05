@@ -368,3 +368,36 @@
     background: linear-gradient(135deg, #2e82a6, #88c8e4);
     box-shadow: 0 6px 20px rgba(46, 130, 166, 0.4);
 }
+
+/* Maintenance Modal Styles */
+.maintenance-content {
+    max-width: 420px;
+}
+
+.maintenance-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: wrenchFloat 3s ease-in-out infinite;
+}
+
+@keyframes wrenchFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(15deg);
+    }
+}
+
+.close-btn {
+    background: linear-gradient(135deg, #1d6e91, #2e82a6);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(46, 130, 166, 0.25);
+}
+
+.close-btn:hover {
+    background: linear-gradient(135deg, #2e82a6, #88c8e4);
+    box-shadow: 0 6px 20px rgba(46, 130, 166, 0.4);
+}
+

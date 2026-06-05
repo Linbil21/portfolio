@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="project-card-footer">
-                        <a href="#" class="project-btn live-btn">
+                        <a href="#" class="project-btn live-btn" onclick="showMaintenanceModal(event)">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="project-card-footer">
-                        <a href="#" class="project-btn live-btn">
+                        <a href="#" class="project-btn live-btn" onclick="showMaintenanceModal(event)">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div class="project-card-footer">
-                        <a href="#" class="project-btn live-btn">
+                        <a href="#" class="project-btn live-btn" onclick="showMaintenanceModal(event)">
                             <span>Live Link</span>
                             <span class="btn-icon">🌐</span>
                         </a>
@@ -170,6 +170,18 @@
             <div class="modal-actions">
                 <button onclick="closePasswordModal()" class="modal-btn cancel-btn">Cancel</button>
                 <button onclick="submitPassword()" class="modal-btn submit-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Modal -->
+    <div id="maintenance-modal" class="modal-overlay">
+        <div class="modal-content maintenance-content">
+            <div class="maintenance-icon">🛠️</div>
+            <h3>Website Under Maintenance</h3>
+            <p>This project website is currently under maintenance or development. We are working hard to bring it live soon!</p>
+            <div class="modal-actions">
+                <button onclick="closeMaintenanceModal()" class="modal-btn close-btn">Okay</button>
             </div>
         </div>
     </div>
@@ -204,11 +216,23 @@
             }
         }
 
+        function showMaintenanceModal(event) {
+            event.preventDefault();
+            document.getElementById("maintenance-modal").classList.add("active");
+        }
+
+        function closeMaintenanceModal() {
+            document.getElementById("maintenance-modal").classList.remove("active");
+        }
+
         // Close modal when clicking outside
         window.onclick = function (event) {
-            const modal = document.getElementById("password-modal");
-            if (event.target == modal) {
+            const passwordModal = document.getElementById("password-modal");
+            const maintenanceModal = document.getElementById("maintenance-modal");
+            if (event.target == passwordModal) {
                 closePasswordModal();
+            } else if (event.target == maintenanceModal) {
+                closeMaintenanceModal();
             }
         }
 
