@@ -418,6 +418,20 @@
     transform: translateY(-2px);
 }
 
+/* Guide Button */
+.guide-btn {
+    background: rgba(255, 159, 67, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 159, 67, 0.2);
+}
+
+.guide-btn:hover {
+    background: rgba(255, 159, 67, 0.18);
+    border-color: #ff9f43;
+    box-shadow: 0 6px 20px rgba(255, 159, 67, 0.15);
+    transform: translateY(-2px);
+}
+
 /* Image Modal Styles */
 .image-modal-content {
     max-width: 90%;
