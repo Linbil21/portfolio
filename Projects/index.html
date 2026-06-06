@@ -45,13 +45,9 @@
                             <span class="btn-icon">🌐</span>
                         </a>
                         <a href="#" class="project-btn image-btn"
-                            onclick="showProjectImage(event, '../image/Project1.png')">
+                            onclick="showProjectImage(event, '../image/Project1.png', '../GUIDE/index.html')">
                             <span>Image</span>
                             <span class="btn-icon">🖼️</span>
-                        </a>
-                        <a href="../GUIDE/index.html" class="project-btn guide-btn">
-                            <span>Guide</span>
-                            <span class="btn-icon">📖</span>
                         </a>
                         <a href="https://github.com/Linbil21" target="_blank" class="project-btn github-btn"
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
@@ -299,7 +295,13 @@
     <div id="image-modal" class="modal-overlay">
         <div class="modal-content image-modal-content">
             <span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
-            <img id="modal-project-image" src="" alt="Project Screenshot" class="modal-image">
+            <div class="image-modal-wrapper">
+                <img id="modal-project-image" src="" alt="Project Screenshot" class="modal-image">
+                <a id="modal-guide-link" href="#" class="image-guide-overlay" style="display: none;">
+                    <span class="guide-overlay-icon">📖</span>
+                    <span class="guide-overlay-text">Guide</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -342,11 +344,18 @@
             document.getElementById("maintenance-modal").classList.remove("active");
         }
 
-        function showProjectImage(event, imageSrc) {
+        function showProjectImage(event, imageSrc, guideUrl) {
             event.preventDefault();
             const modal = document.getElementById("image-modal");
             const modalImg = document.getElementById("modal-project-image");
+            const guideLink = document.getElementById("modal-guide-link");
             modalImg.src = imageSrc;
+            if (guideUrl) {
+                guideLink.href = guideUrl;
+                guideLink.style.display = "flex";
+            } else {
+                guideLink.style.display = "none";
+            }
             modal.classList.add("active");
         }
 

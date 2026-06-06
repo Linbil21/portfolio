@@ -432,6 +432,60 @@
     transform: translateY(-2px);
 }
 
+/* Image Modal Wrapper */
+.image-modal-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Guide Overlay inside Image Modal */
+.image-guide-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: rgba(0, 18, 32, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 159, 67, 0.35);
+    border-radius: 12px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    animation: guideOverlayPulse 2.5s ease-in-out infinite;
+}
+
+.image-guide-overlay:hover {
+    background: rgba(255, 159, 67, 0.25);
+    border-color: #ff9f43;
+    box-shadow: 0 6px 25px rgba(255, 159, 67, 0.3);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.guide-overlay-icon {
+    font-size: 1.2rem;
+}
+
+.guide-overlay-text {
+    letter-spacing: 0.5px;
+}
+
+@keyframes guideOverlayPulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 159, 67, 0.2);
+    }
+}
+
 /* Image Modal Styles */
 .image-modal-content {
     max-width: 90%;
