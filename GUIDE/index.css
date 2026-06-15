@@ -74,6 +74,12 @@
     box-shadow: 0 25px 60px rgba(0, 18, 32, 0.7), 0 0 40px rgba(46, 130, 166, 0.35);
 }
 
+.guide-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* ─── Horizontal Slide Carousel ──────────────────────────── */
 .guide-carousel {
     width: 100%;
