@@ -17,12 +17,57 @@
     <section class="guide-section">
         <div class="guide-container">
             <h1 class="guide-title">SYSTEM GUIDE</h1>
-            <p class="guide-subtitle">Logistic Barangay System</p>
+            <p class="guide-subtitle">Lgu2Minutes</p>
 
-            <!-- System Preview Image -->
-            <div class="guide-hero-image">
-                <img src="../Screenshot/Lgu2Minutes.png" alt="Logistic System Preview">
-                <div class="image-glow"></div>
+            <!-- System Preview Carousel -->
+            <div class="guide-carousel">
+                <div class="guide-carousel-track" id="guideCarouselTrack">
+                    <img src="../Album/Lgu2Minutes/Landing page.png" alt="Landing Page" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/login page.png" alt="Login Page" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Dashboard.png" alt="Dashboard" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/2fa.png" alt="2FA" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Account &amp; Security management.png" alt="Account &amp; Security Management" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Attendance .png" alt="Attendance" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Coucilor directory.png" alt="Councilor Directory" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Library.png" alt="Library" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Minutes Editors.png" alt="Minutes Editors" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Monitoring.png" alt="Monitoring" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Records.png" alt="Records" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Roll call.png" alt="Roll Call" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Session Minuetes.png" alt="Session Minutes" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Tracking.png" alt="Tracking" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Trascribe.png" alt="Transcribe" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Trasmitte.png" alt="Transmit" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/Verification code.png" alt="Verification Code" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/agenda builder.png" alt="Agenda Builder" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/commitees hub.png" alt="Committees Hub" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/reading application.png" alt="Reading Application" class="carousel-slide">
+                    <img src="../Album/Lgu2Minutes/salary module.png" alt="Salary Module" class="carousel-slide">
+                </div>
+                <div class="guide-carousel-glow"></div>
+                <div class="guide-carousel-dots" id="guideCarouselDots">
+                    <button class="c-dot c-dot--active" data-index="0" aria-label="Slide 1"></button>
+                    <button class="c-dot" data-index="1" aria-label="Slide 2"></button>
+                    <button class="c-dot" data-index="2" aria-label="Slide 3"></button>
+                    <button class="c-dot" data-index="3" aria-label="Slide 4"></button>
+                    <button class="c-dot" data-index="4" aria-label="Slide 5"></button>
+                    <button class="c-dot" data-index="5" aria-label="Slide 6"></button>
+                    <button class="c-dot" data-index="6" aria-label="Slide 7"></button>
+                    <button class="c-dot" data-index="7" aria-label="Slide 8"></button>
+                    <button class="c-dot" data-index="8" aria-label="Slide 9"></button>
+                    <button class="c-dot" data-index="9" aria-label="Slide 10"></button>
+                    <button class="c-dot" data-index="10" aria-label="Slide 11"></button>
+                    <button class="c-dot" data-index="11" aria-label="Slide 12"></button>
+                    <button class="c-dot" data-index="12" aria-label="Slide 13"></button>
+                    <button class="c-dot" data-index="13" aria-label="Slide 14"></button>
+                    <button class="c-dot" data-index="14" aria-label="Slide 15"></button>
+                    <button class="c-dot" data-index="15" aria-label="Slide 16"></button>
+                    <button class="c-dot" data-index="16" aria-label="Slide 17"></button>
+                    <button class="c-dot" data-index="17" aria-label="Slide 18"></button>
+                    <button class="c-dot" data-index="18" aria-label="Slide 19"></button>
+                    <button class="c-dot" data-index="19" aria-label="Slide 20"></button>
+                    <button class="c-dot" data-index="20" aria-label="Slide 21"></button>
+                </div>
             </div>
 
             <!-- Getting Started -->
@@ -104,6 +149,33 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('guideCarouselTrack');
+            const dots = document.querySelectorAll('.c-dot');
+            let currentIndex = 0;
+            const totalSlides = dots.length;
+
+            function updateCarousel(index) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('c-dot--active'));
+                dots[index].classList.add('c-dot--active');
+                currentIndex = index;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateCarousel(index);
+                });
+            });
+
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                let nextIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel(nextIndex);
+            }, 5000);
+        });
+    </script>
 </body>
 
 </html>
