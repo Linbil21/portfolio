@@ -281,6 +281,7 @@
             <h3>Website Under Maintenance</h3>
             <p>This project website is currently under maintenance or development. We are working hard to bring it live
                 soon!</p>
+            <p>It hasn't been uploaded to the hosting yet; it's still only in xampp.</p>
             <div class="modal-actions">
                 <button onclick="closeMaintenanceModal()" class="modal-btn close-btn">Okay</button>
             </div>
@@ -374,14 +375,14 @@
             const modalImg = document.getElementById("modal-project-image");
             const guideLink = document.getElementById("modal-guide-link");
             const dotsContainer = document.getElementById("modal-slider-dots");
-            
+
             clearInterval(modalSlideInterval);
             currentModalSlide = 0;
             currentModalImages = Array.isArray(imageSrc) ? imageSrc : [imageSrc];
-            
+
             modalImg.src = currentModalImages[0];
             modalImg.style.opacity = 1;
-            
+
             dotsContainer.innerHTML = '';
             if (currentModalImages.length > 1) {
                 currentModalImages.forEach((_, idx) => {
@@ -390,7 +391,7 @@
                     dot.onclick = () => goToModalSlide(idx);
                     dotsContainer.appendChild(dot);
                 });
-                
+
                 modalSlideInterval = setInterval(() => {
                     goToModalSlide((currentModalSlide + 1) % currentModalImages.length);
                 }, 3500);
@@ -408,16 +409,16 @@
         function goToModalSlide(idx) {
             const modalImg = document.getElementById("modal-project-image");
             const dots = document.querySelectorAll('.slider-dot');
-            
+
             modalImg.style.opacity = 0;
-            
+
             setTimeout(() => {
                 currentModalSlide = idx;
                 modalImg.src = currentModalImages[currentModalSlide];
-                
+
                 dots.forEach(d => d.classList.remove('active'));
-                if(dots[currentModalSlide]) dots[currentModalSlide].classList.add('active');
-                
+                if (dots[currentModalSlide]) dots[currentModalSlide].classList.add('active');
+
                 modalImg.style.opacity = 1;
             }, 300);
         }
