@@ -20,7 +20,7 @@
             <p class="guide-subtitle">Lgu2Minutes</p>
 
             <!-- System Preview Carousel -->
-            <div class="guide-carousel">
+            <div class="guide-carousel" style="margin-bottom: 20px;">
                 <div class="guide-carousel-track" id="guideCarouselTrack">
                     <img src="../Album/Lgu2Minutes/Landing page.png" alt="Landing Page" class="carousel-slide">
                     <img src="../Album/Lgu2Minutes/login page.png" alt="Login Page" class="carousel-slide">
@@ -45,7 +45,9 @@
                     <img src="../Album/Lgu2Minutes/salary module.png" alt="Salary Module" class="carousel-slide">
                 </div>
                 <div class="guide-carousel-glow"></div>
-                <div class="guide-carousel-dots" id="guideCarouselDots">
+            </div>
+            <!-- Dots outside carousel to avoid overflow:hidden clipping -->
+            <div id="guideCarouselDots" style="display:flex; flex-wrap:wrap; justify-content:center; gap:7px; margin-bottom:45px;">
                     <button class="c-dot c-dot--active" data-index="0" aria-label="Slide 1"></button>
                     <button class="c-dot" data-index="1" aria-label="Slide 2"></button>
                     <button class="c-dot" data-index="2" aria-label="Slide 3"></button>
@@ -67,7 +69,6 @@
                     <button class="c-dot" data-index="18" aria-label="Slide 19"></button>
                     <button class="c-dot" data-index="19" aria-label="Slide 20"></button>
                     <button class="c-dot" data-index="20" aria-label="Slide 21"></button>
-                </div>
             </div>
 
             <!-- Getting Started -->
