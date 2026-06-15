@@ -20,10 +20,22 @@
             <h1 class="guide-title">SYSTEM GUIDE</h1>
             <p class="guide-subtitle">Atiéra Hotel & Restaurant Management System</p>
 
-            <!-- System Preview Image -->
-            <div class="guide-hero-image">
-                <img src="../Screenshot/Atiera.png" alt="Atiéra Dashboard Preview">
-                <div class="image-glow"></div>
+            <!-- System Preview Carousel -->
+            <div class="guide-carousel">
+                <div class="guide-carousel-track" id="ateria-track">
+                    <img src="../Screenshot/Atiera.png"      alt="Atiéra Overview" class="carousel-slide">
+                    <img src="../Album/Ateria/Dashboard.png"           alt="Dashboard"           class="carousel-slide">
+                    <img src="../Album/Ateria/Maintenance.png"         alt="Maintenance"         class="carousel-slide">
+                    <img src="../Album/Ateria/Document-archiving.png"  alt="Document Archiving"  class="carousel-slide">
+                    <img src="../Album/Ateria/Facilities.png"          alt="Facilities"          class="carousel-slide">
+                    <img src="../Album/Ateria/Calendar.png"            alt="Calendar"            class="carousel-slide">
+                    <img src="../Album/Ateria/Visitor.png"             alt="Visitor"             class="carousel-slide">
+                    <img src="../Album/Ateria/Reports.png"             alt="Reports"             class="carousel-slide">
+                    <img src="../Album/Ateria/legalmanagement.png"     alt="Legal Management"    class="carousel-slide">
+                    <img src="../Album/Ateria/Loading.png"             alt="Loading"             class="carousel-slide">
+                </div>
+                <div class="guide-carousel-glow"></div>
+                <div class="guide-carousel-dots" id="ateria-dots"></div>
             </div>
 
             <!-- Getting Started -->
@@ -283,6 +295,40 @@
             </div>
         </div>
     </section>
+    <script>
+        (function() {
+            const track = document.getElementById('ateria-track');
+            const dotsContainer = document.getElementById('ateria-dots');
+            const slides = track.querySelectorAll('.carousel-slide');
+            let current = 0;
+            let timer;
+
+            // Build dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'c-dot' + (i === 0 ? ' c-dot--active' : '');
+                dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                dot.addEventListener('click', () => { goTo(i); resetTimer(); });
+                dotsContainer.appendChild(dot);
+            });
+
+            function goTo(idx) {
+                current = (idx + slides.length) % slides.length;
+                track.style.transform = 'translateX(-' + (current * 100) + ')';
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dotsContainer.querySelectorAll('.c-dot').forEach((d, i) => {
+                    d.classList.toggle('c-dot--active', i === current);
+                });
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(() => goTo(current + 1), 3500);
+            }
+
+            resetTimer();
+        })();
+    </script>
 </body>
 
 </html>

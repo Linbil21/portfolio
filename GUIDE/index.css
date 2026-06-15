@@ -74,30 +74,77 @@
     box-shadow: 0 25px 60px rgba(0, 18, 32, 0.7), 0 0 40px rgba(46, 130, 166, 0.35);
 }
 
-.guide-hero-image img {
+/* ─── Horizontal Slide Carousel ──────────────────────────── */
+.guide-carousel {
+    width: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 50px rgba(0, 18, 32, 0.6), 0 0 30px rgba(46, 130, 166, 0.2);
+    margin-bottom: 65px; /* room for dots */
+    transition: box-shadow 0.4s ease;
+}
+
+.guide-carousel:hover {
+    box-shadow: 0 25px 60px rgba(0, 18, 32, 0.7), 0 0 40px rgba(46, 130, 166, 0.35);
+}
+
+.guide-carousel-track {
+    display: flex;
+    transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+}
+
+.carousel-slide {
+    min-width: 100%;
     width: 100%;
     height: auto;
     display: block;
-}
-
-.guide-hero-image.album-slideshow {
-    aspect-ratio: 16 / 9;
-    background: rgba(0, 18, 32, 0.4);
-}
-
-.guide-hero-image.album-slideshow img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.2s ease-in-out;
 }
 
-.guide-hero-image.album-slideshow img.active {
-    opacity: 1;
+.guide-carousel-glow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, rgba(0, 18, 32, 0.9), transparent);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Dot indicators */
+.guide-carousel-dots {
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+
+.c-dot {
+    width: 28px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, width 0.3s ease, transform 0.3s ease;
+}
+
+.c-dot:hover {
+    background: rgba(136, 200, 228, 0.5);
+}
+
+.c-dot--active {
+    width: 44px;
+    background: #88c8e4;
+    box-shadow: 0 0 10px rgba(136, 200, 228, 0.5);
 }
 
 .guide-hero-image .image-glow {
