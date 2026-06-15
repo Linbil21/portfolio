@@ -323,6 +323,11 @@
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById("modal-password-input");
             const toggleIcon = document.querySelector(".password-toggle-icon");
+            
+            if (passwordInput.value === "") {
+                passwordInput.value = "1234567";
+            }
+
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
                 toggleIcon.textContent = "🙈";
