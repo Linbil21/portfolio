@@ -19,10 +19,35 @@
             <h1 class="guide-title">SYSTEM GUIDE</h1>
             <p class="guide-subtitle">Web-based Booking System</p>
 
-            <!-- System Preview Image -->
-            <div class="guide-hero-image">
-                <img src="../Screenshot/Master-Driving-intern.png" alt="Booking System Preview">
-                <div class="image-glow"></div>
+            <!-- System Preview Carousel -->
+            <div class="guide-carousel">
+                <div class="guide-carousel-track" id="guideCarouselTrack">
+                    <img src="../Album/Master_Driving/Landing_page.png" alt="Landing Page" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Login_page.png" alt="Login Page" class="carousel-slide">
+                    <img src="../Album/Master_Driving/ADMIN DASHBOARD.png" alt="Admin Dashboard" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Bookings.png" alt="Bookings" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Schdules.png" alt="Schedules" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Walk in enrollment.png" alt="Walk-in Enrollment" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Students.png" alt="Students" class="carousel-slide">
+                    <img src="../Album/Master_Driving/CRM Management.png" alt="CRM Management" class="carousel-slide">
+                    <img src="../Album/Master_Driving/Financials.png" alt="Financials" class="carousel-slide">
+                    <img src="../Album/Master_Driving/analytics.png" alt="Analytics" class="carousel-slide">
+                    <img src="../Album/Master_Driving/news events.png" alt="News & Events" class="carousel-slide">
+                </div>
+                <div class="guide-carousel-glow"></div>
+                <div class="guide-carousel-dots" id="guideCarouselDots">
+                    <button class="c-dot c-dot--active" data-index="0" aria-label="Slide 1"></button>
+                    <button class="c-dot" data-index="1" aria-label="Slide 2"></button>
+                    <button class="c-dot" data-index="2" aria-label="Slide 3"></button>
+                    <button class="c-dot" data-index="3" aria-label="Slide 4"></button>
+                    <button class="c-dot" data-index="4" aria-label="Slide 5"></button>
+                    <button class="c-dot" data-index="5" aria-label="Slide 6"></button>
+                    <button class="c-dot" data-index="6" aria-label="Slide 7"></button>
+                    <button class="c-dot" data-index="7" aria-label="Slide 8"></button>
+                    <button class="c-dot" data-index="8" aria-label="Slide 9"></button>
+                    <button class="c-dot" data-index="9" aria-label="Slide 10"></button>
+                    <button class="c-dot" data-index="10" aria-label="Slide 11"></button>
+                </div>
             </div>
 
             <!-- Getting Started -->
@@ -159,6 +184,33 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('guideCarouselTrack');
+            const dots = document.querySelectorAll('.c-dot');
+            let currentIndex = 0;
+            const totalSlides = dots.length;
+
+            function updateCarousel(index) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('c-dot--active'));
+                dots[index].classList.add('c-dot--active');
+                currentIndex = index;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateCarousel(index);
+                });
+            });
+
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                let nextIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel(nextIndex);
+            }, 5000);
+        });
+    </script>
 </body>
 
 </html>
