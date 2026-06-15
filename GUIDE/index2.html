@@ -19,10 +19,25 @@
             <h1 class="guide-title">SYSTEM GUIDE</h1>
             <p class="guide-subtitle">School Management System</p>
 
-            <!-- System Preview Image -->
-            <div class="guide-hero-image">
-                <img src="../Screenshot/Sms.png" alt="School Management System Preview">
-                <div class="image-glow"></div>
+            <!-- System Preview Carousel -->
+            <div class="guide-carousel">
+                <div class="guide-carousel-track" id="guideCarouselTrack">
+                    <img src="../Album/SMS/Landing page.png" alt="Landing Page" class="carousel-slide">
+                    <img src="../Album/SMS/Admin.png" alt="Admin" class="carousel-slide">
+                    <img src="../Album/SMS/Admission.png" alt="Admission" class="carousel-slide">
+                    <img src="../Album/SMS/Cashier.png" alt="Cashier" class="carousel-slide">
+                    <img src="../Album/SMS/Student.png" alt="Student" class="carousel-slide">
+                    <img src="../Album/SMS/Superadmin.png" alt="Superadmin" class="carousel-slide">
+                </div>
+                <div class="guide-carousel-glow"></div>
+                <div class="guide-carousel-dots" id="guideCarouselDots">
+                    <button class="c-dot c-dot--active" data-index="0" aria-label="Slide 1"></button>
+                    <button class="c-dot" data-index="1" aria-label="Slide 2"></button>
+                    <button class="c-dot" data-index="2" aria-label="Slide 3"></button>
+                    <button class="c-dot" data-index="3" aria-label="Slide 4"></button>
+                    <button class="c-dot" data-index="4" aria-label="Slide 5"></button>
+                    <button class="c-dot" data-index="5" aria-label="Slide 6"></button>
+                </div>
             </div>
 
             <!-- Getting Started -->
@@ -151,6 +166,32 @@
             </div>
         </div>
     </section>
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('guideCarouselTrack');
+            const dots = document.querySelectorAll('.c-dot');
+            let currentIndex = 0;
+            const totalSlides = dots.length;
 
+            function updateCarousel(index) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('c-dot--active'));
+                dots[index].classList.add('c-dot--active');
+                currentIndex = index;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateCarousel(index);
+                });
+            });
+
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                let nextIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel(nextIndex);
+            }, 5000);
+        });
+    </script>
+</body>
 </html>
