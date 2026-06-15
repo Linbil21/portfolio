@@ -21,8 +21,17 @@
             <p class="guide-subtitle">Atiéra Hotel & Restaurant Management System</p>
 
             <!-- System Preview Image -->
-            <div class="guide-hero-image">
-                <img src="../Screenshot/Atiera.png" alt="Atiéra Dashboard Preview">
+            <div class="guide-hero-image album-slideshow" id="ateria-album">
+                <img src="../Screenshot/Atiera.png" alt="Atiéra Dashboard Preview" class="slide active">
+                <img src="../Album/Ateria/Calendar.png" alt="Calendar" class="slide">
+                <img src="../Album/Ateria/Dashboard.png" alt="Dashboard" class="slide">
+                <img src="../Album/Ateria/Document-archiving.png" alt="Document Archiving" class="slide">
+                <img src="../Album/Ateria/Facilities.png" alt="Facilities" class="slide">
+                <img src="../Album/Ateria/Loading.png" alt="Loading" class="slide">
+                <img src="../Album/Ateria/Maintenance.png" alt="Maintenance" class="slide">
+                <img src="../Album/Ateria/Reports.png" alt="Reports" class="slide">
+                <img src="../Album/Ateria/Visitor.png" alt="Visitor" class="slide">
+                <img src="../Album/Ateria/legalmanagement.png" alt="Legal Management" class="slide">
                 <div class="image-glow"></div>
             </div>
 
@@ -283,6 +292,19 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('#ateria-album .slide');
+            let currentSlide = 0;
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 3500);
+            }
+        });
+    </script>
 </body>
 
 </html>
