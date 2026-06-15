@@ -45,7 +45,7 @@
                             <span class="btn-icon">🌐</span>
                         </a>
                         <a href="#" class="project-btn image-btn"
-                            onclick="showProjectImage(event, '../Screenshot/Atiera.png', '../GUIDE/index.html')">
+                            onclick="showProjectImage(event, ['../Screenshot/Atiera.png', '../Album/Ateria/Calendar.png', '../Album/Ateria/Dashboard.png', '../Album/Ateria/Document-archiving.png', '../Album/Ateria/Facilities.png', '../Album/Ateria/Loading.png', '../Album/Ateria/Maintenance.png', '../Album/Ateria/Reports.png', '../Album/Ateria/Visitor.png', '../Album/Ateria/legalmanagement.png'], '../GUIDE/index.html')">
                             <span>Image</span>
                             <span class="btn-icon">🖼️</span>
                         </a>
@@ -293,6 +293,7 @@
             <span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
             <div class="image-modal-wrapper">
                 <img id="modal-project-image" src="" alt="Project Screenshot" class="modal-image">
+                <div class="slider-dots" id="modal-slider-dots"></div>
                 <a id="modal-guide-link" href="#" class="image-guide-overlay" style="display: none;">
                     <span class="guide-overlay-icon">📖</span>
                     <span class="guide-overlay-text">Guide</span>
@@ -363,12 +364,38 @@
             document.getElementById("maintenance-modal").classList.remove("active");
         }
 
+        let modalSlideInterval;
+        let currentModalSlide = 0;
+        let currentModalImages = [];
+
         function showProjectImage(event, imageSrc, guideUrl) {
             event.preventDefault();
             const modal = document.getElementById("image-modal");
             const modalImg = document.getElementById("modal-project-image");
             const guideLink = document.getElementById("modal-guide-link");
-            modalImg.src = imageSrc;
+            const dotsContainer = document.getElementById("modal-slider-dots");
+            
+            clearInterval(modalSlideInterval);
+            currentModalSlide = 0;
+            currentModalImages = Array.isArray(imageSrc) ? imageSrc : [imageSrc];
+            
+            modalImg.src = currentModalImages[0];
+            modalImg.style.opacity = 1;
+            
+            dotsContainer.innerHTML = '';
+            if (currentModalImages.length > 1) {
+                currentModalImages.forEach((_, idx) => {
+                    const dot = document.createElement('div');
+                    dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
+                    dot.onclick = () => goToModalSlide(idx);
+                    dotsContainer.appendChild(dot);
+                });
+                
+                modalSlideInterval = setInterval(() => {
+                    goToModalSlide((currentModalSlide + 1) % currentModalImages.length);
+                }, 3500);
+            }
+
             if (guideUrl) {
                 guideLink.href = guideUrl;
                 guideLink.style.display = "flex";
@@ -378,8 +405,26 @@
             modal.classList.add("active");
         }
 
+        function goToModalSlide(idx) {
+            const modalImg = document.getElementById("modal-project-image");
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            modalImg.style.opacity = 0;
+            
+            setTimeout(() => {
+                currentModalSlide = idx;
+                modalImg.src = currentModalImages[currentModalSlide];
+                
+                dots.forEach(d => d.classList.remove('active'));
+                if(dots[currentModalSlide]) dots[currentModalSlide].classList.add('active');
+                
+                modalImg.style.opacity = 1;
+            }, 300);
+        }
+
         function closeImageModal() {
             document.getElementById("image-modal").classList.remove("active");
+            clearInterval(modalSlideInterval);
         }
 
         // Close modal when clicking outside
