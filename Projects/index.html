@@ -45,7 +45,7 @@
                             <span class="btn-icon">🌐</span>
                         </a>
                         <a href="#" class="project-btn image-btn"
-                            onclick="showProjectImage(event, ['../Screenshot/Atiera.png', '../Album/Ateria/Calendar.png', '../Album/Ateria/Dashboard.png', '../Album/Ateria/Document-archiving.png', '../Album/Ateria/Facilities.png', '../Album/Ateria/Loading.png', '../Album/Ateria/Maintenance.png', '../Album/Ateria/Reports.png', '../Album/Ateria/Visitor.png', '../Album/Ateria/legalmanagement.png'], '../GUIDE/index.html')">
+                            onclick="showProjectImage(event, ['../Album/Ateria/Login Page.png', '../Album/Ateria/Calendar.png', '../Album/Ateria/Dashboard.png', '../Album/Ateria/Document-archiving.png', '../Album/Ateria/Facilities.png', '../Album/Ateria/Loading.png', '../Album/Ateria/Maintenance.png', '../Album/Ateria/Reports.png', '../Album/Ateria/Visitor.png', '../Album/Ateria/legalmanagement.png'], '../GUIDE/index.html')">
                             <span>Image</span>
                             <span class="btn-icon">🖼️</span>
                         </a>
@@ -261,6 +261,7 @@
     <!-- Password Modal -->
     <div id="password-modal" class="modal-overlay">
         <div class="modal-content">
+            <span class="close-modal-btn" onclick="closePasswordModal()">&times;</span>
             <h3>Private Repository</h3>
             <p>This repository is private. Please enter the password to view the source code.</p>
             <p>click eye icon to show password</p>
@@ -279,6 +280,7 @@
     <!-- Maintenance Modal -->
     <div id="maintenance-modal" class="modal-overlay">
         <div class="modal-content maintenance-content">
+            <span class="close-modal-btn" onclick="closeMaintenanceModal()">&times;</span>
             <div class="maintenance-icon">🛠️</div>
             <h3>Website Under Maintenance</h3>
             <p>This project website is currently under maintenance or development. We are working hard to bring it live
