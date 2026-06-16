@@ -295,7 +295,7 @@
         <div class="modal-content image-modal-content">
             <span class="close-modal-btn" onclick="closeImageModal()">&times;</span>
             <div class="image-modal-wrapper">
-                <img id="modal-project-image" src="" alt="Project Screenshot" class="modal-image">
+                <div id="modal-images-container"></div>
                 <div class="slider-dots" id="modal-slider-dots"></div>
                 <a id="modal-guide-link" href="#" class="image-guide-overlay" style="display: none;">
                     <span class="guide-overlay-icon">📖</span>
@@ -374,7 +374,7 @@
         function showProjectImage(event, imageSrc, guideUrl) {
             event.preventDefault();
             const modal = document.getElementById("image-modal");
-            const modalImg = document.getElementById("modal-project-image");
+            const imagesContainer = document.getElementById("modal-images-container");
             const guideLink = document.getElementById("modal-guide-link");
             const dotsContainer = document.getElementById("modal-slider-dots");
 
@@ -382,10 +382,17 @@
             currentModalSlide = 0;
             currentModalImages = Array.isArray(imageSrc) ? imageSrc : [imageSrc];
 
-            modalImg.src = currentModalImages[0];
-            modalImg.style.opacity = 1;
-
+            imagesContainer.innerHTML = '';
             dotsContainer.innerHTML = '';
+            
+            currentModalImages.forEach((src, idx) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = "Project Screenshot";
+                img.className = `modal-image ${idx === 0 ? 'active-slide' : ''}`;
+                imagesContainer.appendChild(img);
+            });
+
             if (currentModalImages.length > 1) {
                 currentModalImages.forEach((_, idx) => {
                     const dot = document.createElement('div');
@@ -409,20 +416,21 @@
         }
 
         function goToModalSlide(idx) {
-            const modalImg = document.getElementById("modal-project-image");
+            const images = document.querySelectorAll('#modal-images-container .modal-image');
             const dots = document.querySelectorAll('.slider-dot');
 
-            modalImg.style.opacity = 0;
+            if (images[currentModalSlide]) {
+                images[currentModalSlide].classList.remove('active-slide');
+            }
+            
+            currentModalSlide = idx;
+            
+            if (images[currentModalSlide]) {
+                images[currentModalSlide].classList.add('active-slide');
+            }
 
-            setTimeout(() => {
-                currentModalSlide = idx;
-                modalImg.src = currentModalImages[currentModalSlide];
-
-                dots.forEach(d => d.classList.remove('active'));
-                if (dots[currentModalSlide]) dots[currentModalSlide].classList.add('active');
-
-                modalImg.style.opacity = 1;
-            }, 300);
+            dots.forEach(d => d.classList.remove('active'));
+            if (dots[currentModalSlide]) dots[currentModalSlide].classList.add('active');
         }
 
         function closeImageModal() {
