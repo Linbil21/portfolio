@@ -164,7 +164,11 @@
             let current = 0;
             let timer;
 
+            // Set first slide as active
+            slides[0].classList.add('active-slide');
+
             // Build dots
+            dotsContainer.style.gap = '7px';
             slides.forEach((_, i) => {
                 const dot = document.createElement('button');
                 dot.className = 'c-dot' + (i === 0 ? ' c-dot--active' : '');
@@ -174,9 +178,9 @@
             });
 
             function goTo(idx) {
+                slides[current].classList.remove('active-slide');
                 current = (idx + slides.length) % slides.length;
-                track.style.transform = 'translateX(-' + (current * 100) + ')';
-                track.style.transform = `translateX(-${current * 100}%)`;
+                slides[current].classList.add('active-slide');
                 dotsContainer.querySelectorAll('.c-dot').forEach((d, i) => {
                     d.classList.toggle('c-dot--active', i === current);
                 });

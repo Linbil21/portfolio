@@ -35,7 +35,7 @@
                     <img src="../Album/Master_Driving/news events.png" alt="News & Events" class="carousel-slide">
                 </div>
                 <div class="guide-carousel-glow"></div>
-                <div class="guide-carousel-dots" id="guideCarouselDots">
+                <div class="guide-carousel-dots" id="guideCarouselDots" style="gap:7px;">
                     <button class="c-dot c-dot--active" data-index="0" aria-label="Slide 1"></button>
                     <button class="c-dot" data-index="1" aria-label="Slide 2"></button>
                     <button class="c-dot" data-index="2" aria-label="Slide 3"></button>
@@ -186,13 +186,17 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const track = document.getElementById('guideCarouselTrack');
+            const slides = document.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.c-dot');
             let currentIndex = 0;
-            const totalSlides = dots.length;
+            const totalSlides = slides.length;
+
+            // Set first slide as active
+            slides[0].classList.add('active-slide');
 
             function updateCarousel(index) {
-                track.style.transform = `translateX(-${index * 100}%)`;
+                slides[currentIndex].classList.remove('active-slide');
+                slides[index].classList.add('active-slide');
                 dots.forEach(dot => dot.classList.remove('c-dot--active'));
                 dots[index].classList.add('c-dot--active');
                 currentIndex = index;
