@@ -162,7 +162,7 @@
                             <span class="btn-icon">🌐</span>
                         </a>
                         <a href="#" class="project-btn image-btn"
-                            onclick="showProjectImage(event, '../Screenshot/Lgu2Minutes.png', '../GUIDE/index4.html')">
+                            onclick="showProjectImage(event, ['../Album/Lgu2Minutes/Landing page.png', '../Album/Lgu2Minutes/login page.png', '../Album/Lgu2Minutes/Dashboard.png', '../Album/Lgu2Minutes/2fa.png', '../Album/Lgu2Minutes/Account & Security management.png', '../Album/Lgu2Minutes/Attendance .png', '../Album/Lgu2Minutes/Coucilor directory.png', '../Album/Lgu2Minutes/Library.png', '../Album/Lgu2Minutes/Minutes Editors.png', '../Album/Lgu2Minutes/Monitoring.png', '../Album/Lgu2Minutes/Records.png', '../Album/Lgu2Minutes/Roll call.png', '../Album/Lgu2Minutes/Session Minuetes.png', '../Album/Lgu2Minutes/Tracking.png', '../Album/Lgu2Minutes/Trascribe.png', '../Album/Lgu2Minutes/Trasmitte.png', '../Album/Lgu2Minutes/Verification code.png', '../Album/Lgu2Minutes/agenda builder.png', '../Album/Lgu2Minutes/commitees hub.png', '../Album/Lgu2Minutes/reading application.png', '../Album/Lgu2Minutes/salary module.png'], '../GUIDE/index4.html')">
                             <span>Image</span>
                             <span class="btn-icon">🖼️</span>
                         </a>
@@ -392,6 +392,15 @@
                 img.className = `modal-image ${idx === 0 ? 'active-slide' : ''}`;
                 imagesContainer.appendChild(img);
             });
+
+            // Spacer to preserve container height so images can crossfade gracefully
+            const spacer = document.createElement('img');
+            spacer.src = currentModalImages[0];
+            spacer.style.width = '100%';
+            spacer.style.height = 'auto';
+            spacer.style.visibility = 'hidden';
+            spacer.style.display = 'block';
+            imagesContainer.appendChild(spacer);
 
             if (currentModalImages.length > 1) {
                 currentModalImages.forEach((_, idx) => {
