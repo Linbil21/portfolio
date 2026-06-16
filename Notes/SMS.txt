@@ -1,0 +1,46 @@
+# Steps to Access the Website
+
+1. Go to GitHub and download the source code.
+2. Set up the project in XAMPP. Make sure that MySQL is running on **port 3306**.
+3. Open the landing page by visiting:
+
+   ```
+   http://localhost/sms/sms/index.php
+   ```
+4. Click the **"Get Started"** button.
+5. You will be redirected to:
+
+   ```
+   http://localhost/sms/auth/Login.php
+   ```
+6. Choose the portal or website role you want to access.
+7. Log in using one of the accounts below and explore the system.
+
+# Test Accounts
+
+### Admin
+
+**Email:** [admin@example.com](mailto:admin@example.com)
+**Password:** admin123
+
+### Admission
+
+**Email:** [admission@example.com](mailto:admission@example.com)
+**Password:** admission123
+
+### Cashier
+
+**Email:** [cashier@example.com](mailto:cashier@example.com)
+**Password:** cashier123
+
+### Super Admin
+
+**Email:** [superadmin@example.com](mailto:superadmin@example.com)
+**Password:** superadmin123
+
+### Student
+
+**Email:** [student@example.com](mailto:student@example.com)
+**Password:** student123
+
+Enjoy exploring the website and its features!

@@ -1,0 +1,26 @@
+**Steps to Access the Website**
+
+### Admin Access
+
+1. An admin account must first request a **Verification Code** before accessing the system.
+2. A verification modal will appear.
+3. Please check the registered email address for the verification code.
+
+### Password Security
+
+**Password:** 1234
+
+### Website
+
+**manage.indevfinite.com**
+*(Used for our Capstone Project.)*
+
+### Tools and Programming Languages Used
+
+* Pure PHP
+* JavaScript
+* REST API
+* MySQL
+
+
+
