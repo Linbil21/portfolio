@@ -67,20 +67,12 @@
                     <h3>Send Message</h3>
                     <form id="contact-form" onsubmit="handleContactSubmit(event)">
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" required placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" required placeholder="Enter subject">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" rows="5" required
+                            <textarea id="message" name="message" rows="5" required
                                 placeholder="Write your message here..."></textarea>
                         </div>
                         <button type="submit" class="submit-form-btn">
@@ -106,10 +98,41 @@
     <script>
         function handleContactSubmit(event) {
             event.preventDefault();
-            // Show the success toast modal
-            document.getElementById("success-toast").classList.add("active");
-            // Reset the form
-            document.getElementById("contact-form").reset();
+
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+            const btn = document.querySelector(".submit-form-btn");
+            const btnText = btn.querySelector("span");
+
+            btnText.innerText = "Sending...";
+            btn.disabled = true;
+
+            fetch("https://formsubmit.co/ajax/linbilcelestre3@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                btnText.innerText = "Send Message";
+                btn.disabled = false;
+                // Show the success toast modal
+                document.getElementById("success-toast").classList.add("active");
+                // Reset the form
+                document.getElementById("contact-form").reset();
+            })
+            .catch(error => {
+                console.log(error);
+                btnText.innerText = "Send Message";
+                btn.disabled = false;
+                alert("Failed to send message. Please try again.");
+            });
         }
 
         function closeToast() {

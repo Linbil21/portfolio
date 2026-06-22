@@ -454,6 +454,20 @@
     transform: translateY(-2px);
 }
 
+/* Comment Button */
+.comment-btn {
+    background: rgba(160, 136, 228, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(160, 136, 228, 0.15);
+}
+
+.comment-btn:hover {
+    background: rgba(160, 136, 228, 0.15);
+    border-color: #a088e4;
+    box-shadow: 0 6px 20px rgba(160, 136, 228, 0.15);
+    transform: translateY(-2px);
+}
+
 /* Image Modal Wrapper */
 .image-modal-wrapper {
     position: relative;

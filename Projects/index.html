@@ -54,6 +54,11 @@
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
                         </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'Atiéra Hotel & Restaurant Management System')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
+                        </a>
                     </div>
                 </div>
 
@@ -92,6 +97,11 @@
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21/SMS')">
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
+                        </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'School Management System')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
                         </a>
                     </div>
                 </div>
@@ -132,6 +142,11 @@
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
                         </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'Web-based Booking System')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
+                        </a>
                     </div>
                 </div>
 
@@ -170,6 +185,11 @@
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
+                        </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'LGU2Minutes')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
                         </a>
                     </div>
                 </div>
@@ -212,6 +232,11 @@
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
                         </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'Libraries Front end')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
+                        </a>
                     </div>
                 </div>
 
@@ -251,6 +276,11 @@
                             onclick="checkPrivateSource(event, 'https://github.com/Linbil21')">
                             <span>Code</span>
                             <span class="btn-icon">🔗</span>
+                        </a>
+                        <a href="#" class="project-btn comment-btn"
+                            onclick="showCommentModal(event, 'Guidance System')">
+                            <span>Comment</span>
+                            <span class="btn-icon">💬</span>
                         </a>
                     </div>
                 </div>
@@ -304,6 +334,29 @@
                     <span class="guide-overlay-text">Guide</span>
                 </a>
             </div>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div id="comment-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal-btn" onclick="closeCommentModal()">&times;</span>
+            <h3>Leave a Comment</h3>
+            <p id="comment-modal-project-name" style="color: var(--accent-color); font-weight: bold; margin-bottom: 15px;"></p>
+            <form id="project-comment-form" onsubmit="submitComment(event)">
+                <div class="form-group" style="text-align: left;">
+                    <label for="comment-name" style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Name (Optional)</label>
+                    <input type="text" id="comment-name" placeholder="Your Name" style="width: 100%; padding: 12px; margin-bottom: 15px; margin-top: 5px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: white; outline: none; font-family: inherit;">
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label for="comment-text" style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Comment</label>
+                    <textarea id="comment-text" rows="4" required placeholder="Write your comment here..." style="width: 100%; padding: 12px; margin-bottom: 20px; margin-top: 5px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: white; resize: vertical; outline: none; font-family: inherit;"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="closeCommentModal()" class="modal-btn cancel-btn">Cancel</button>
+                    <button type="submit" class="modal-btn submit-btn">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -449,17 +502,71 @@
             clearInterval(modalSlideInterval);
         }
 
+        function showCommentModal(event, projectName) {
+            event.preventDefault();
+            document.getElementById("comment-modal-project-name").textContent = projectName;
+            document.getElementById("comment-modal").classList.add("active");
+            document.getElementById("project-comment-form").reset();
+        }
+
+        function closeCommentModal() {
+            document.getElementById("comment-modal").classList.remove("active");
+        }
+
+        function submitComment(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('.submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            const projectName = document.getElementById("comment-modal-project-name").textContent;
+            const commentName = document.getElementById("comment-name").value || "Anonymous";
+            const commentText = document.getElementById("comment-text").value;
+
+            // Send via formsubmit to linbilcelestre3@gmail.com
+            fetch("https://formsubmit.co/ajax/linbilcelestre3@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: `New Project Comment on ${projectName}`,
+                    name: commentName,
+                    project: projectName,
+                    comment: commentText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(`Thank you for your comment on ${projectName}!`);
+                closeCommentModal();
+                btn.innerText = originalText;
+                btn.disabled = false;
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Failed to send comment. Please try again.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+
         // Close modal when clicking outside
         window.onclick = function (event) {
             const passwordModal = document.getElementById("password-modal");
             const maintenanceModal = document.getElementById("maintenance-modal");
             const imageModal = document.getElementById("image-modal");
+            const commentModal = document.getElementById("comment-modal");
             if (event.target == passwordModal) {
                 closePasswordModal();
             } else if (event.target == maintenanceModal) {
                 closeMaintenanceModal();
             } else if (event.target == imageModal) {
                 closeImageModal();
+            } else if (event.target == commentModal) {
+                closeCommentModal();
             }
         }
 
