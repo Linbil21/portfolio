@@ -551,7 +551,16 @@
             
             const commentsList = document.getElementById("view-comments-list");
             commentsList.innerHTML = "";
-            const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+            
+            let defaultComments = [];
+            if (projectName === 'Atiéra Hotel & Restaurant Management System') {
+                defaultComments = [{ name: "linbil", text: "good" }];
+            }
+            
+            let comments = JSON.parse(localStorage.getItem("comments_" + projectName));
+            if (!comments || comments.length === 0) {
+                comments = defaultComments;
+            }
             
             if (comments.length === 0) {
                 commentsList.innerHTML = "<p style='color: rgba(255,255,255,0.5); font-size: 0.9rem; text-align: center; margin-top: 20px;'>No comments yet for this project.</p>";
@@ -598,7 +607,16 @@
             const commentsList = document.getElementById("comments-list");
             const commentsCount = document.getElementById("comments-count");
             commentsList.innerHTML = "";
-            const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+            
+            let defaultComments = [];
+            if (projectName === 'Atiéra Hotel & Restaurant Management System') {
+                defaultComments = [{ name: "linbil", text: "good" }];
+            }
+            
+            let comments = JSON.parse(localStorage.getItem("comments_" + projectName));
+            if (!comments || comments.length === 0) {
+                comments = defaultComments;
+            }
             
             commentsCount.textContent = comments.length;
 
@@ -658,7 +676,16 @@
             .then(response => response.json())
             .then(data => {
                 // Save to local storage
-                const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+                let defaultComments = [];
+                if (projectName === 'Atiéra Hotel & Restaurant Management System') {
+                    defaultComments = [{ name: "linbil", text: "good" }];
+                }
+                
+                let comments = JSON.parse(localStorage.getItem("comments_" + projectName));
+                if (!comments || comments.length === 0) {
+                    comments = defaultComments;
+                }
+                
                 comments.push({ name: commentName, text: commentText });
                 localStorage.setItem("comments_" + projectName, JSON.stringify(comments));
 
