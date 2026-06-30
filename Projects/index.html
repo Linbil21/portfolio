@@ -344,7 +344,12 @@
             <h3>Leave a Comment</h3>
             <p id="comment-modal-project-name" style="color: var(--accent-color); font-weight: bold; margin-bottom: 15px;"></p>
             
-            <div id="comments-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px; text-align: left; padding-right: 5px;">
+            <div id="comments-accordion" style="background: rgba(255,255,255,0.05); padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.1); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'" onclick="toggleCommentsList()">
+                <span style="color: white; font-weight: bold; font-size: 0.95rem;">View Comments (<span id="comments-count">0</span>)</span>
+                <span id="comments-toggle-icon" style="color: rgba(255,255,255,0.7); font-size: 0.8rem; transition: transform 0.3s ease;">▼</span>
+            </div>
+
+            <div id="comments-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px; text-align: left; padding-right: 5px; display: none;">
                 <!-- Comments will be injected here -->
             </div>
 
@@ -515,14 +520,33 @@
             document.getElementById("comment-modal-project-name").textContent = projectName;
             document.getElementById("comment-modal").classList.add("active");
             document.getElementById("project-comment-form").reset();
+            
+            document.getElementById("comments-list").style.display = "none";
+            document.getElementById("comments-toggle-icon").style.transform = "rotate(0deg)";
+            
             loadComments(projectName);
+        }
+
+        function toggleCommentsList() {
+            const list = document.getElementById("comments-list");
+            const icon = document.getElementById("comments-toggle-icon");
+            if (list.style.display === "none") {
+                list.style.display = "block";
+                icon.style.transform = "rotate(180deg)";
+            } else {
+                list.style.display = "none";
+                icon.style.transform = "rotate(0deg)";
+            }
         }
 
         function loadComments(projectName) {
             const commentsList = document.getElementById("comments-list");
+            const commentsCount = document.getElementById("comments-count");
             commentsList.innerHTML = "";
             const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
             
+            commentsCount.textContent = comments.length;
+
             if (comments.length === 0) {
                 commentsList.innerHTML = "<p style='color: rgba(255,255,255,0.5); font-size: 0.9rem; text-align: center;'>No comments yet. Be the first to comment!</p>";
                 return;
