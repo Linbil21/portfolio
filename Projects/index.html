@@ -360,6 +360,9 @@
         </div>
     </div>
 
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
+
     <script>
         let targetRepoUrl = "";
 
@@ -540,14 +543,14 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(`Thank you for your comment on ${projectName}!`);
+                showNotification(commentName, commentText);
                 closeCommentModal();
                 btn.innerText = originalText;
                 btn.disabled = false;
             })
             .catch(error => {
                 console.log(error);
-                alert("Failed to send comment. Please try again.");
+                showNotification("Error", "Failed to send comment. Please try again.");
                 btn.innerText = originalText;
                 btn.disabled = false;
             });
@@ -576,6 +579,32 @@
                 submitPassword();
             }
         });
+
+        // Notification System
+        function showNotification(name, text) {
+            const container = document.getElementById("notification-container");
+            const notif = document.createElement("div");
+            notif.className = "notification-toast";
+            
+            notif.innerHTML = `
+                <div class="notif-circle"></div>
+                <div class="notif-content">
+                    <p class="notif-name">${name}</p>
+                    <p class="notif-text">${text}</p>
+                </div>
+                <span class="notif-close" onclick="this.parentElement.remove()">&times;</span>
+            `;
+            
+            container.appendChild(notif);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (container.contains(notif)) {
+                    notif.style.animation = "slideOutRight 0.3s forwards";
+                    setTimeout(() => notif.remove(), 300);
+                }
+            }, 5000);
+        }
     </script>
 </body>
 
