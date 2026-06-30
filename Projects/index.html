@@ -19,7 +19,7 @@
 
             <div class="projects-grid">
                 <!-- Project 1: Atiéra Hotel and Restaurant Management System -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('Atiéra Hotel & Restaurant Management System', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Web Developer</span>
                         <span class="project-date"> 2026</span>
@@ -63,7 +63,7 @@
                 </div>
 
                 <!-- Project 2: School Management System -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('School Management System', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Full Stack Developer</span>
                         <span class="project-date"> 2026</span>
@@ -107,7 +107,7 @@
                 </div>
 
                 <!-- Project 3: Booking System -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('Web-based Booking System', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Frontend Developer intern</span>
                         <span class="project-date">2026</span>
@@ -151,7 +151,7 @@
                 </div>
 
                 <!-- Project 4 Logistic System Baragay -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('LGU2Minutes', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Full stack Developer</span>
                         <span class="project-date">2026</span>
@@ -198,7 +198,7 @@
 
 
                 <!-- Project 5 Libraries Front end -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('Libraries Front end', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Front-End Developer</span>
                         <span class="project-date">2026</span>
@@ -242,7 +242,7 @@
 
 
                 <!-- Project 6 Guidance System -->
-                <div class="project-card">
+                <div class="project-card" style="cursor: pointer;" onclick="viewProjectComments('Guidance System', event)">
                     <div class="project-card-header">
                         <span class="project-badge">Front-end Developer</span>
                         <span class="project-date">2026</span>
@@ -367,6 +367,19 @@
                     <button type="submit" class="modal-btn submit-btn">Submit</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- View Comments Modal -->
+    <div id="view-comments-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal-btn" onclick="closeViewCommentsModal()">&times;</span>
+            <h3>Comments</h3>
+            <p id="view-comments-project-name" style="color: var(--accent-color); font-weight: bold; margin-bottom: 20px;"></p>
+            
+            <div id="view-comments-list" style="max-height: 400px; overflow-y: auto; text-align: left; padding-right: 5px;">
+                <!-- Comments will be injected here -->
+            </div>
         </div>
     </div>
 
@@ -527,6 +540,48 @@
             loadComments(projectName);
         }
 
+        function viewProjectComments(projectName, event) {
+            // Prevent opening if a footer button was clicked
+            if (event.target.closest('.project-card-footer')) {
+                return;
+            }
+            
+            document.getElementById("view-comments-project-name").textContent = projectName;
+            document.getElementById("view-comments-modal").classList.add("active");
+            
+            const commentsList = document.getElementById("view-comments-list");
+            commentsList.innerHTML = "";
+            const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = "<p style='color: rgba(255,255,255,0.5); font-size: 0.9rem; text-align: center; margin-top: 20px;'>No comments yet for this project.</p>";
+                return;
+            }
+
+            comments.forEach(c => {
+                const div = document.createElement("div");
+                div.style.background = "rgba(255,255,255,0.05)";
+                div.style.borderLeft = "4px solid #ff4d4d";
+                div.style.padding = "15px";
+                div.style.marginBottom = "15px";
+                div.style.borderRadius = "8px";
+                div.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
+                
+                div.innerHTML = `
+                    <div style="font-weight: bold; color: #fff; font-size: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff4d4d;"></div>
+                        ${c.name}
+                    </div>
+                    <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-top: 8px; margin-left: 22px; line-height: 1.4;">${c.text}</div>
+                `;
+                commentsList.appendChild(div);
+            });
+        }
+
+        function closeViewCommentsModal() {
+            document.getElementById("view-comments-modal").classList.remove("active");
+        }
+
         function toggleCommentsList() {
             const list = document.getElementById("comments-list");
             const icon = document.getElementById("comments-toggle-icon");
@@ -627,6 +682,7 @@
             const maintenanceModal = document.getElementById("maintenance-modal");
             const imageModal = document.getElementById("image-modal");
             const commentModal = document.getElementById("comment-modal");
+            const viewCommentsModal = document.getElementById("view-comments-modal");
             if (event.target == passwordModal) {
                 closePasswordModal();
             } else if (event.target == maintenanceModal) {
@@ -635,6 +691,8 @@
                 closeImageModal();
             } else if (event.target == commentModal) {
                 closeCommentModal();
+            } else if (event.target == viewCommentsModal) {
+                closeViewCommentsModal();
             }
         }
 
