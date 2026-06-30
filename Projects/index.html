@@ -343,6 +343,11 @@
             <span class="close-modal-btn" onclick="closeCommentModal()">&times;</span>
             <h3>Leave a Comment</h3>
             <p id="comment-modal-project-name" style="color: var(--accent-color); font-weight: bold; margin-bottom: 15px;"></p>
+            
+            <div id="comments-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px; text-align: left; padding-right: 5px;">
+                <!-- Comments will be injected here -->
+            </div>
+
             <form id="project-comment-form" onsubmit="submitComment(event)">
                 <div class="form-group" style="text-align: left;">
                     <label for="comment-name" style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Name (Optional)</label>
@@ -510,6 +515,36 @@
             document.getElementById("comment-modal-project-name").textContent = projectName;
             document.getElementById("comment-modal").classList.add("active");
             document.getElementById("project-comment-form").reset();
+            loadComments(projectName);
+        }
+
+        function loadComments(projectName) {
+            const commentsList = document.getElementById("comments-list");
+            commentsList.innerHTML = "";
+            const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = "<p style='color: rgba(255,255,255,0.5); font-size: 0.9rem; text-align: center;'>No comments yet. Be the first to comment!</p>";
+                return;
+            }
+
+            comments.forEach(c => {
+                const div = document.createElement("div");
+                div.style.background = "rgba(255,255,255,0.05)";
+                div.style.borderLeft = "3px solid #ff4d4d";
+                div.style.padding = "10px";
+                div.style.marginBottom = "10px";
+                div.style.borderRadius = "4px";
+                
+                div.innerHTML = `
+                    <div style="font-weight: bold; color: #fff; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff4d4d;"></div>
+                        ${c.name}
+                    </div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 5px; margin-left: 18px;">${c.text}</div>
+                `;
+                commentsList.appendChild(div);
+            });
         }
 
         function closeCommentModal() {
@@ -543,8 +578,14 @@
             })
             .then(response => response.json())
             .then(data => {
+                // Save to local storage
+                const comments = JSON.parse(localStorage.getItem("comments_" + projectName)) || [];
+                comments.push({ name: commentName, text: commentText });
+                localStorage.setItem("comments_" + projectName, JSON.stringify(comments));
+
                 showNotification(commentName, commentText);
-                closeCommentModal();
+                loadComments(projectName);
+                document.getElementById("project-comment-form").reset();
                 btn.innerText = originalText;
                 btn.disabled = false;
             })
